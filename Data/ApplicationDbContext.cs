@@ -11,5 +11,6 @@ namespace DotnetNBA.Data
             }
 
             public DbSet<PlayerDataTotals> PlayerDataTotals {get; set;}
+            public DbSet<PlayerDataTotalsPlayoffs> PlayerDataTotalsPlayoffs {get; set;}
     }
 }
