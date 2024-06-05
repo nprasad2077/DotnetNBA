@@ -37,3 +37,4 @@
 /home/ravi/code/dotnet/DotnetNBA/obj/Debug/net8.0/DotnetNBA.pdb
 /home/ravi/code/dotnet/DotnetNBA/obj/Debug/net8.0/DotnetNBA.genruntimeconfig.cache
 /home/ravi/code/dotnet/DotnetNBA/obj/Debug/net8.0/ref/DotnetNBA.dll
+/home/ravi/code/dotnet/DotnetNBA/obj/Debug/net8.0/DotnetNBA.sourcelink.json
