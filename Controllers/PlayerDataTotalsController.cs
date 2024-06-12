@@ -34,7 +34,22 @@ namespace DotnetNBA.Controllers
             {
                 return NotFound();
             }
-            return playerDataTotal;
+            return Ok(playerDataTotal);
+        }
+
+        [HttpGet("name/{playerName}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataByName(string playerName)
+        {
+                var playerDataTotals = await _context.PlayerDataTotals
+                    .Where(p => EF.Functions.Like(p.PlayerName, $"%{playerName}%"))
+                    .ToListAsync();
+
+                if (playerDataTotals == null || playerDataTotals.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(playerDataTotals);
         }
 
         // New method to test the database connection
