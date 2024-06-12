@@ -19,6 +19,10 @@ namespace DotnetNBA.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Gets all player totals data.
+        /// </summary>
+        /// <returns>A list all player totals data.</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataTotals()
         {
@@ -34,7 +38,67 @@ namespace DotnetNBA.Controllers
             {
                 return NotFound();
             }
-            return playerDataTotal;
+            return Ok(playerDataTotal);
+        }
+
+        [HttpGet("name/{playerName}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataByName(string playerName)
+        {
+            var playerDataTotals = await _context.PlayerDataTotals
+                .Where(p => EF.Functions.Like(p.PlayerName, $"%{playerName}%"))
+                .ToListAsync();
+
+            if (playerDataTotals == null || playerDataTotals.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(playerDataTotals);
+        }
+
+        [HttpGet("season/{season}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataBySeason(int season)
+        {
+            var playerDataTotals = await _context.PlayerDataTotals
+                .Where(p => p.Season == season)
+                .ToListAsync();
+
+            if (playerDataTotals == null || playerDataTotals.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(playerDataTotals);
+        }
+
+        [HttpGet("playerid/{playerId}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataTotalsByPlayerId(string playerId)
+        {
+            var playerDataTotals = await _context.PlayerDataTotals
+                .Where(p => EF.Functions.Like(p.PlayerId, $"%{playerId}%"))
+                .ToListAsync();
+
+            if (playerDataTotals == null || playerDataTotals.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(playerDataTotals);
+        }
+
+        [HttpGet("team/{team}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataByTeam(string team)
+        {
+            var playerDataTotals = await _context.PlayerDataTotals
+                .Where(p => EF.Functions.Like(p.Team, $"%{team}%"))
+                .ToListAsync();
+
+            if (playerDataTotals == null || playerDataTotals.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(playerDataTotals);
         }
 
         // New method to test the database connection

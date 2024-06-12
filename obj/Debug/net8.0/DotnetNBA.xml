@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotnetNBA</name>
+    </assembly>
+    <members>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsController.GetPlayerDataTotals">
+            <summary>
+            Gets all player totals data.
+            </summary>
+            <returns>A list all player totals data.</returns>
+        </member>
+    </members>
+</doc>
