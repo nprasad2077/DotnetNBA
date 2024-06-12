@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotnetNBA.Models
 {
-    [Table("graphql_api_playerdataadvanced")]
-    public class PlayerDataAdvanced
+    [Table("graphql_api_playerdataadvancedplayoffs")]
+    public class PlayerDataAdvancedPlayoffs
     {
         [Key]
         [Column("id")]

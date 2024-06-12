@@ -67,6 +67,36 @@ namespace DotnetNBA.Controllers
                 return Ok(playerDataTotals);
         }
 
+        [HttpGet("playerid/{playerId}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataTotalsByPlayerId (string playerId)
+        {
+            var playerDataTotals = await _context.PlayerDataTotals
+                .Where(p => EF.Functions.Like(p.PlayerId, $"%{playerId}%"))
+                .ToListAsync();
+
+            if (playerDataTotals == null || playerDataTotals.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(playerDataTotals);
+        }
+
+        [HttpGet("team/{team}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataByTeam (string team)
+        {
+            var playerDataTotals = await _context.PlayerDataTotals
+                .Where(p => EF.Functions.Like(p.Team, $"%{team}%"))
+                .ToListAsync();
+            
+            if (playerDataTotals == null || playerDataTotals.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(playerDataTotals);
+        }
+
         // New method to test the database connection
         [HttpGet("count")]
         public async Task<ActionResult<int>> GetPlayerDataTotalsCount()
