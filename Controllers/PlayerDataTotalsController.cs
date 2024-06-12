@@ -52,6 +52,21 @@ namespace DotnetNBA.Controllers
                 return Ok(playerDataTotals);
         }
 
+        [HttpGet("season/{season}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataBySeason(int season)
+        {
+            var playerDataTotals = await _context.PlayerDataTotals
+                .Where(p => p.Season == season)
+                .ToListAsync();
+
+                if (playerDataTotals == null || playerDataTotals.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(playerDataTotals);
+        }
+
         // New method to test the database connection
         [HttpGet("count")]
         public async Task<ActionResult<int>> GetPlayerDataTotalsCount()
