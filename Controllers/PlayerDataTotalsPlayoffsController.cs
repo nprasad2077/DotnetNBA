@@ -97,6 +97,62 @@ namespace DotnetNBA.Controllers
             return Ok(playerDataTotalsPlayoffs);
         }
 
+
+        [HttpGet("query")]
+        public async Task<ActionResult<IEnumerable<PlayerDataTotalsPlayoffs>>> QueryPlayerDataTotalsPlayoffs(
+            string? playerName = null,
+            int? season = null,
+            string? team = null,
+            string? playerId = null,
+            string sortBy = "PlayerName",
+            bool ascending = true,
+            int pageNumber = 1,
+            int pageSize = 10)
+            {
+                var query = _context.PlayerDataTotalsPlayoffs.AsQueryable();
+
+                if (!string.IsNullOrEmpty(playerName))
+                {
+                    query = query.Where(p => EF.Functions.Like(p.PlayerName, $"%{playerName}%"));
+                }
+
+                if (season.HasValue)
+                {
+                    query = query.Where(p=> p.Season == season.Value);
+                }
+
+                if (!string.IsNullOrEmpty(team))
+                {
+                    query = query.Where(p => EF.Functions.Like(p.PlayerName, $"%{team}%"));
+                }
+
+                if (!string.IsNullOrEmpty(playerId))
+                {
+                    query = query.Where(p => EF.Functions.Like(p.PlayerName, $"%{playerId}%"));
+                }
+
+                query = sortBy switch
+                {
+                    "PlayerName" => ascending ? query.OrderBy(p => p.PlayerName) : query.OrderByDescending(p => p.PlayerName),
+                    "Season" => ascending ? query.OrderBy(p => p.Season) : query.OrderByDescending(p => p.Season),
+                    "Team" => ascending ? query.OrderBy(p => p.Team) : query.OrderByDescending(p => p.Team),
+                    _ => query.OrderBy(p => p.PlayerName)
+                };
+
+                var playerDataTotalsPlayoffs = await query
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                if (playerDataTotalsPlayoffs == null || playerDataTotalsPlayoffs.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(playerDataTotalsPlayoffs);
+            }
+
+
         // New method to test the database connection
         [HttpGet("count")]
         public async Task<ActionResult<int>> GetPlayerDataTotalsPlayoffsCount()

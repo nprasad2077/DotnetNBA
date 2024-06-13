@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "/home/ravi/code/dotnet/DotnetNBA/DotnetNBA.csproj": {}
+    "/Users/ravi/code/dotnet/DotnetNBA/DotnetNBA.csproj": {}
   },
   "projects": {
-    "/home/ravi/code/dotnet/DotnetNBA/DotnetNBA.csproj": {
+    "/Users/ravi/code/dotnet/DotnetNBA/DotnetNBA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ravi/code/dotnet/DotnetNBA/DotnetNBA.csproj",
+        "projectUniqueName": "/Users/ravi/code/dotnet/DotnetNBA/DotnetNBA.csproj",
         "projectName": "DotnetNBA",
-        "projectPath": "/home/ravi/code/dotnet/DotnetNBA/DotnetNBA.csproj",
-        "packagesPath": "/home/ravi/.nuget/packages/",
-        "outputPath": "/home/ravi/code/dotnet/DotnetNBA/obj/",
+        "projectPath": "/Users/ravi/code/dotnet/DotnetNBA/DotnetNBA.csproj",
+        "packagesPath": "/Users/ravi/.nuget/packages/",
+        "outputPath": "/Users/ravi/code/dotnet/DotnetNBA/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ravi/.nuget/NuGet/NuGet.Config"
+          "/Users/ravi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -79,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
