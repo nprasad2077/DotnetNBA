@@ -41,6 +41,10 @@ namespace DotnetNBA.Controllers
             return Ok(playerDataTotal);
         }
 
+        /// <summary>
+        /// Gets data for specfic player by name.
+        /// </summary>
+        /// <returns>A list of all data available for a specific player.</returns>
         [HttpGet("name/{playerName}")]
         public async Task<ActionResult<IEnumerable<PlayerDataTotals>>> GetPlayerDataByName(string playerName)
         {
