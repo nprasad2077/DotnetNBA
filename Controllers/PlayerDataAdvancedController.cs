@@ -124,12 +124,12 @@ namespace DotnetNBA.Controllers
 
                 if (!string.IsNullOrEmpty(team))
                 {
-                    query = query.Where(p => EF.Functions.Like(p.PlayerName, $"%{team}%"));
+                    query = query.Where(p => EF.Functions.Like(p.Team, $"%{team}%"));
                 }
 
                 if (!string.IsNullOrEmpty(playerId))
                 {
-                    query = query.Where(p => EF.Functions.Like(p.PlayerName, $"%{playerId}%"));
+                    query = query.Where(p => EF.Functions.Like(p.PlayerId, $"%{playerId}%"));
                 }
 
                 query = sortBy switch
@@ -137,6 +137,18 @@ namespace DotnetNBA.Controllers
                     "PlayerName" => ascending ? query.OrderBy(p => p.PlayerName) : query.OrderByDescending(p => p.PlayerName),
                     "Season" => ascending ? query.OrderBy(p => p.Season) : query.OrderByDescending(p => p.Season),
                     "Team" => ascending ? query.OrderBy(p => p.Team) : query.OrderByDescending(p => p.Team),
+                    "Games" => ascending ? query.OrderBy(p => p.Games) : query.OrderByDescending(p => p.Games),
+                    "PER" => ascending ? query.OrderBy(p => p.PER) : query.OrderByDescending(p => p.PER),
+                    "TSPercent" => ascending ? query.OrderBy(p => p.TSPercent) : query.OrderByDescending(p => p.TSPercent),
+                    "TotalRBPercent" => ascending ? query.OrderBy(p => p.TotalRBPercent) : query.OrderByDescending(p => p.TotalRBPercent),
+                    "AssistPercent" => ascending ? query.OrderBy(p => p.AssistPercent) : query.OrderByDescending(p => p.AssistPercent),
+                    "StealPercent" => ascending ? query.OrderBy(p => p.StealPercent) : query.OrderByDescending(p => p.StealPercent),
+                    "BlockPercent" => ascending ? query.OrderBy(p => p.BlockPercent) : query.OrderByDescending(p => p.BlockPercent),
+                    "TurnoverPercent" => ascending ? query.OrderBy(p => p.TurnoverPercent) : query.OrderByDescending(p => p.TurnoverPercent),
+                    "UsagePercent" => ascending ? query.OrderBy(p => p.UsagePercent) : query.OrderByDescending(p => p.UsagePercent),
+                    "WinShares" => ascending ? query.OrderBy(p => p.WinShares) : query.OrderByDescending(p => p.WinShares),
+                    "Box" => ascending ? query.OrderBy(p => p.Box) : query.OrderByDescending(p => p.Box),
+                    "VORP" => ascending ? query.OrderBy(p => p.VORP) : query.OrderByDescending(p => p.VORP),
                     _ => query.OrderBy(p => p.PlayerName)
                 };
 
