@@ -49,9 +49,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
+// HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // HTTP request pipeline for development.
     app.UseDeveloperExceptionPage();
     app.UseCors("AllowAllOrigins");
 
@@ -66,46 +66,45 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
     });
 }
-else if (app.Environment.IsProduction())
+
+// Enable CORS
+app.UseCors("AllowAllOrigins");
+
+// Use HTTPS Redirection and configure Kestrel with a certificate only in Production
+if (app.Environment.IsProduction())
 {
     var pfxFilePath = Environment.GetEnvironmentVariable("PFX_FILE_PATH");
     var pfxPassword = Environment.GetEnvironmentVariable("PFX_PASSWORD");
+    app.UseSwagger();
+
+    // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+    // specifying the Swagger JSON endpoint.
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI v1");
+        c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
+    });
+
+    
 
     if (!string.IsNullOrEmpty(pfxFilePath) && !string.IsNullOrEmpty(pfxPassword))
     {
         var certificate = new X509Certificate2(pfxFilePath, pfxPassword);
 
         app.UseHttpsRedirection();
-
-        // Configure Kestrel to use HTTPS in production.
-        builder.WebHost.ConfigureKestrel(options =>
-        {
-            options.ListenAnyIP(7012, listenOptions =>
-            {
-                listenOptions.UseHttps(certificate);
-            });
-            options.ListenAnyIP(5214);
-        });
-
-        // Enable middleware to serve generated Swagger as a JSON endpoint.
-        app.UseSwagger();
-
-        // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-        // specifying the Swagger JSON endpoint.
-        app.UseSwaggerUI(c =>
-        {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI v1");
-            c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
-        });
+        app.Urls.Add("https://*:7012");
+        app.Urls.Add("http://*:5214");
     }
     else
     {
         app.Logger.LogWarning("HTTPS is configured in production but no certificate was provided.");
     }
 }
-
-// Enable CORS
-app.UseCors("AllowAllOrigins");
+else
+{
+    // If not in production, configure HTTP only
+    app.Urls.Add("http://*:5214");
+}
 
 app.UseAuthorization();
 
