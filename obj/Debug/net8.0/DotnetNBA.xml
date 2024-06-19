@@ -10,5 +10,11 @@
             </summary>
             <returns>A list all player totals data.</returns>
         </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsController.GetPlayerDataByName(System.String)">
+            <summary>
+            Gets data for specfic player by name.
+            </summary>
+            <returns>A list of all data available for a specific player.</returns>
+        </member>
     </members>
 </doc>

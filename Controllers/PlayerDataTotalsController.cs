@@ -130,12 +130,12 @@ namespace DotnetNBA.Controllers
 
                 if (!string.IsNullOrEmpty(team))
                 {
-                    query = query.Where(p => EF.Functions.Like(p.PlayerName, $"%{team}%"));
+                    query = query.Where(p => EF.Functions.Like(p.Team, $"%{team}%"));
                 }
 
                 if (!string.IsNullOrEmpty(playerId))
                 {
-                    query = query.Where(p => EF.Functions.Like(p.PlayerName, $"%{playerId}%"));
+                    query = query.Where(p => EF.Functions.Like(p.PlayerId, $"%{playerId}%"));
                 }
 
                 query = sortBy switch
@@ -143,6 +143,12 @@ namespace DotnetNBA.Controllers
                     "PlayerName" => ascending ? query.OrderBy(p => p.PlayerName) : query.OrderByDescending(p => p.PlayerName),
                     "Season" => ascending ? query.OrderBy(p => p.Season) : query.OrderByDescending(p => p.Season),
                     "Team" => ascending ? query.OrderBy(p => p.Team) : query.OrderByDescending(p => p.Team),
+                    "Points" => ascending ? query.OrderBy(p => p.Points) : query.OrderByDescending(p => p.Points),
+                    "Assists" => ascending ? query.OrderBy(p => p.Assists) : query.OrderByDescending(p => p.Assists),
+                    "Games" => ascending ? query.OrderBy(p => p.Games) : query.OrderByDescending(p => p.Games),
+                    "TotalRb" => ascending ? query.OrderBy(p => p.Team) : query.OrderByDescending(p => p.Team),
+                    "Blocks" => ascending ? query.OrderBy(p => p.Blocks) : query.OrderByDescending(p => p.Blocks),
+                    "Steals" => ascending ? query.OrderBy(p => p.Steals) : query.OrderByDescending(p => p.Steals),
                     _ => query.OrderBy(p => p.PlayerName)
                 };
 
