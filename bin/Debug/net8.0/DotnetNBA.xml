@@ -4,17 +4,125 @@
         <name>DotnetNBA</name>
     </assembly>
     <members>
-        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsController.GetPlayerDataTotals">
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedController.QueryPlayerDataAdvanced(System.String,System.Nullable{System.Int32},System.String,System.String,System.String,System.Boolean,System.Int32,System.Int32)">
             <summary>
-            Gets all player totals data.
+            Multi paramter query
             </summary>
-            <returns>A list all player totals data.</returns>
+            <returns>Query by multiple paramters.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedController.GetPlayerDataByName(System.String)">
+            <summary>
+            Gets data for specfic player by name.
+            </summary>
+            <returns>A list of all data available for a specific player.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedController.GetPlayerDataBySeason(System.Int32)">
+            <summary>
+            Gets data for specfic all players in a season.
+            </summary>
+            <returns>All player data for a specified season.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedController.GetPlayerDataByTeam(System.String)">
+            <summary>
+            Get all data, across all seasons for any team.
+            </summary>
+            <returns>Get all data, across all seasons for any team (abbreviation).</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedController.GetPlayerDataAdvancedCount">
+            <summary>
+             Method to test the database connection and retrieve player count.
+            </summary>
+            <returns>Method to test the database connection and retrieve player count.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedPlayoffsController.QueryPlayerDataAdvancedPlayoffs(System.String,System.Nullable{System.Int32},System.String,System.String,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Multi paramter query
+            </summary>
+            <returns>Query by multiple paramters.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedPlayoffsController.GetPlayerDataByName(System.String)">
+            <summary>
+            Gets data for specfic player by name.
+            </summary>
+            <returns>A list of all data available for a specific player.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedPlayoffsController.GetPlayerDataBySeason(System.Int32)">
+            <summary>
+            Gets data for specfic all players in a season.
+            </summary>
+            <returns>All player data for a specified season.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedPlayoffsController.GetPlayerDataByTeam(System.String)">
+            <summary>
+            Get all data, across all seasons for any team.
+            </summary>
+            <returns>Get all data, across all seasons for any team (abbreviation).</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataAdvancedPlayoffsController.GetPlayerDataAdvancedPlayoffsCount">
+            <summary>
+             Method to test the database connection and retrieve player count.
+            </summary>
+            <returns>Method to test the database connection and retrieve player count.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsController.QueryPlayerDataTotals(System.String,System.Nullable{System.Int32},System.String,System.String,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Multi paramter query
+            </summary>
+            <returns>Query by multiple paramters.</returns>
         </member>
         <member name="M:DotnetNBA.Controllers.PlayerDataTotalsController.GetPlayerDataByName(System.String)">
             <summary>
             Gets data for specfic player by name.
             </summary>
             <returns>A list of all data available for a specific player.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsController.GetPlayerDataBySeason(System.Int32)">
+            <summary>
+            Gets data for specfic all players in a season.
+            </summary>
+            <returns>All player data for a specified season.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsController.GetPlayerDataByTeam(System.String)">
+            <summary>
+            Get all data, across all seasons for any team.
+            </summary>
+            <returns>Get all data, across all seasons for any team (abbreviation).</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsController.GetPlayerDataTotalsCount">
+            <summary>
+             Method to test the database connection and retrieve player count.
+            </summary>
+            <returns>Method to test the database connection and retrieve player count.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsPlayoffsController.QueryPlayerDataTotalsPlayoffs(System.String,System.Nullable{System.Int32},System.String,System.String,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Multi paramter query
+            </summary>
+            <returns>Query by multiple paramters.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsPlayoffsController.GetPlayerDataByName(System.String)">
+            <summary>
+            Gets data for specfic player by name.
+            </summary>
+            <returns>A list of all data available for a specific player.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsPlayoffsController.GetPlayerDataBySeason(System.Int32)">
+            <summary>
+            Gets data for specfic all players in a season.
+            </summary>
+            <returns>All player data for a specified season.</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsPlayoffsController.GetPlayerDataByTeam(System.String)">
+            <summary>
+            Get all data, across all seasons for any team.
+            </summary>
+            <returns>Get all data, across all seasons for any team (abbreviation).</returns>
+        </member>
+        <member name="M:DotnetNBA.Controllers.PlayerDataTotalsPlayoffsController.GetPlayerDataTotalsPlayoffsCount">
+            <summary>
+             Method to test the database connection and retrieve player count.
+            </summary>
+            <returns>Method to test the database connection and retrieve player count.</returns>
         </member>
     </members>
 </doc>
