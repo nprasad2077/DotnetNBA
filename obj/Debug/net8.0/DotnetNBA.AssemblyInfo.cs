@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DotnetNBA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97f7ae102b50935c5d908c3da39d8f96fb37d043")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+46074ce8200f20e645dead95fb49d48dd833e9fc")]
 [assembly: System.Reflection.AssemblyProductAttribute("DotnetNBA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DotnetNBA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

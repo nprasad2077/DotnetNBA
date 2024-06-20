@@ -19,86 +19,10 @@ namespace DotnetNBA.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataAdvanced()
-        {
-            return await _context.PlayerDataAdvanced.ToListAsync();
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PlayerDataAdvanced>> GetPlayerDataAdvanced(int id)
-        {
-            var playerDataAdvanced = await _context.PlayerDataAdvanced.FindAsync(id);
-
-            if (playerDataAdvanced == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(playerDataAdvanced);
-        }
-
-        [HttpGet("name/{playerName}")]
-        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataByName(string playerName)
-        {
-                var playerDataAdvanced = await _context.PlayerDataAdvanced
-                    .Where(p => EF.Functions.Like(p.PlayerName, $"%{playerName}%"))
-                    .ToListAsync();
-
-                if (playerDataAdvanced == null || playerDataAdvanced.Count == 0)
-                {
-                    return NotFound();
-                }
-
-                return Ok(playerDataAdvanced);
-        }
-
-        [HttpGet("season/{season}")]
-        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataBySeason(int season)
-        {
-            var playerDataAdvanced = await _context.PlayerDataAdvanced
-                .Where(p => p.Season == season)
-                .ToListAsync();
-
-                if (playerDataAdvanced == null || playerDataAdvanced.Count == 0)
-                {
-                    return NotFound();
-                }
-
-                return Ok(playerDataAdvanced);
-        }
-
-
-        [HttpGet("playerid/{playerId}")]
-        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataAdvancedByPlayerId (string playerId)
-        {
-            var playerDataAdvanceds = await _context.PlayerDataAdvanced
-                .Where(p => EF.Functions.Like(p.PlayerId, $"%{playerId}%"))
-                .ToListAsync();
-
-            if (playerDataAdvanceds == null || playerDataAdvanceds.Count == 0)
-            {
-                return NotFound();
-            }
-
-            return Ok(playerDataAdvanceds);
-        }
-
-        [HttpGet("team/{team}")]
-        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataByTeam (string team)
-        {
-            var playerDataAdvanced = await _context.PlayerDataAdvanced
-                .Where(p => EF.Functions.Like(p.Team, $"%{team}%"))
-                .ToListAsync();
-            
-            if (playerDataAdvanced == null || playerDataAdvanced.Count == 0)
-            {
-                return NotFound();
-            }
-
-            return Ok(playerDataAdvanced);
-        }
-
+        /// <summary>
+        /// Multi paramter query
+        /// </summary>
+        /// <returns>Query by multiple paramters.</returns>
         [HttpGet("query")]
         public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> QueryPlayerDataAdvanced(
             string? playerName = null,
@@ -114,7 +38,7 @@ namespace DotnetNBA.Controllers
 
                 if (!string.IsNullOrEmpty(playerName))
                 {
-                    query = query.Where(p => EF.Functions.Like(p.PlayerName, $"%{playerName}%"));
+                    query = query.Where(p => EF.Functions.Like(p.PlayerName.ToLower(), $"%{playerName.ToLower()}%"));
                 }
 
                 if (season.HasValue)
@@ -165,7 +89,103 @@ namespace DotnetNBA.Controllers
                 return Ok(playerDataAdvanced);
             }
 
+    /*[HttpGet]
+        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataAdvanced()
+        {
+            return await _context.PlayerDataAdvanced.ToListAsync();
+        }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PlayerDataAdvanced>> GetPlayerDataAdvanced(int id)
+        {
+            var playerDataAdvanced = await _context.PlayerDataAdvanced.FindAsync(id);
+
+            if (playerDataAdvanced == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(playerDataAdvanced);
+        }*/
+
+        /// <summary>
+        /// Gets data for specfic player by name.
+        /// </summary>
+        /// <returns>A list of all data available for a specific player.</returns>
+        [HttpGet("name/{playerName}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataByName(string playerName)
+        {
+                var playerDataAdvanced = await _context.PlayerDataAdvanced
+                    .Where(p => EF.Functions.Like(p.PlayerName.ToLower(), $"%{playerName.ToLower()}%"))
+                    .ToListAsync();
+
+                if (playerDataAdvanced == null || playerDataAdvanced.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(playerDataAdvanced);
+        }
+
+        /// <summary>
+        /// Gets data for specfic all players in a season.
+        /// </summary>
+        /// <returns>All player data for a specified season.</returns>
+        [HttpGet("season/{season}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataBySeason(int season)
+        {
+            var playerDataAdvanced = await _context.PlayerDataAdvanced
+                .Where(p => p.Season == season)
+                .ToListAsync();
+
+                if (playerDataAdvanced == null || playerDataAdvanced.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(playerDataAdvanced);
+        }
+
+
+        [HttpGet("playerid/{playerId}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataAdvancedByPlayerId (string playerId)
+        {
+            var playerDataAdvanceds = await _context.PlayerDataAdvanced
+                .Where(p => EF.Functions.Like(p.PlayerId, $"%{playerId}%"))
+                .ToListAsync();
+
+            if (playerDataAdvanceds == null || playerDataAdvanceds.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(playerDataAdvanceds);
+        }
+
+        /// <summary>
+        /// Get all data, across all seasons for any team.
+        /// </summary>
+        /// <returns>Get all data, across all seasons for any team (abbreviation).</returns>
+        [HttpGet("team/{team}")]
+        public async Task<ActionResult<IEnumerable<PlayerDataAdvanced>>> GetPlayerDataByTeam (string team)
+        {
+            var playerDataAdvanced = await _context.PlayerDataAdvanced
+                .Where(p => EF.Functions.Like(p.Team, $"%{team}%"))
+                .ToListAsync();
+            
+            if (playerDataAdvanced == null || playerDataAdvanced.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(playerDataAdvanced);
+        }
+
+        // New method to test the database connection
+        /// <summary>
+        ///  Method to test the database connection and retrieve player count.
+        /// </summary>
+        /// <returns>Method to test the database connection and retrieve player count.</returns>
         [HttpGet("count")]
         public async Task<ActionResult<int>> GetPlayerDataAdvancedCount()
         {
